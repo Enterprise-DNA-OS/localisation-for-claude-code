@@ -1,11 +1,40 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
+    "name": "translator-brief",
+    "title": "DRAFT translator handoff",
+    "for_each": "select id,name from projects order by name",
     "file": "name",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Translation and review work",
+        "sql": "select * from translation_status where project_id=$1 order by key,locale",
+        "columns": [
+          "project",
+          "key",
+          "locale",
+          "source_text",
+          "translation",
+          "state"
+        ],
+        "note": "Check meaning, tone and context with a competent reviewer. Nothing is sent."
+      }
+    ]
+  },
+  {
+    "name": "release-signoff",
+    "title": "DRAFT localisation release checklist",
+    "for_each": "select id,name from projects order by name",
+    "file": "name",
+    "sections": [
+      {
+        "title": "Language readiness",
+        "sql": "select project,locale,total,ready,blocked from release_readiness where project_id=$1 order by locale"
+      },
+      {
+        "title": "Reviewer evidence",
+        "sql": "select s.name,t.locale,t.reviewer,t.reviewed_version,s.version current_source_version,t.evidence,t.reviewed_at from strings s join translations t on t.string_id=s.id where s.project_id=$1 order by s.name,t.locale",
+        "note": "Readiness is a record check, not a legal opinion or linguistic certification. A separate person approves deployment."
+      }
     ]
   }
 ]

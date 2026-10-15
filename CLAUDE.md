@@ -1,43 +1,52 @@
 # Localisation for Claude Code: operating instructions
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+This is a plain text localisation desk for product teams and agencies. The operator owns the project records and chooses the review policy. Ask for missing business context before changing a real record.
 
-## Who this is for
+Read the CLI before making a claim about the records. Never invent translations or review evidence. Use a competent reviewer for meaning, grammar and context. The database records decisions; it does not certify them.
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+## One route per recurring job
 
-Fill this in once. A worker with context knows. A worker without it guesses.
-
-## How to work
-
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
-
-## Routing table: one right way for each recurring job
-
-| When the operator asks for... | Use this |
+| Job | Workflow |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| projects | /projects |
+| locales | /locales |
+| strings | /strings |
+| backlog | /backlog |
+| review queue | /review-queue |
+| release readiness | /release-readiness |
+| overdue | /overdue |
+| attention | /attention |
+| compliance | /compliance |
+| weekly review | /weekly-review |
+| activity | /activity |
+| glossary | /glossary |
+| add project | /add-project |
+| add locale | /add-locale |
+| add key | /add-key |
+| set source | /set-source |
+| set translation | /set-translation |
+| approve | /approve |
+| add task | /add-task |
+| close task | /close-task |
+| review project | /review-project |
+| review key | /review-key |
+| add term | /add-term |
+| import | /import |
+| export | /export |
+| release bundle | /release-bundle |
+| draft handoff | /draft-handoff |
+| draft review | /draft-review |
+| Add a field or rule | /customise |
+| Add a read-only report | /new-view |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+## Working rules
 
-## Hard rules
+Use scripts/localise.mjs through npm run localise. Every read supports --json. Every mutation needs --actor and supports --dry-run. Read before writing. List ambiguity and use the correct UUID. Do not guess a reviewer, evidence reference or date.
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
+Never send, publish, deploy or delete from this repo. Drafts go to drafts/. A local release file is not approval to deploy. Never bypass readiness checks. Every source or target edit needs review again. Read docs/compliance.md before interpreting compliance.
 
-## Where things live
+DATABASE_URL selects PostgreSQL. Otherwise PGlite stores records in .data/db. One process at a time for PGlite. Do not read or print secrets. The database owner has privileged access; actor labels are not authentication. Protect imports, exports, backups and generated documents.
 
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Lokalise.
+Schema changes use a new numbered migration under supabase/migrations. Update CLI, commands, import, views, documents and tests together. npm test uses isolated data. Never run tests against a customer database.
 
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/lokalise
+Omni by Enterprise DNA installs, customises and runs this for you: https://enterprisedna.co/omni/book?offer=replace-software&utm_medium=agent&utm_campaign=lokalise

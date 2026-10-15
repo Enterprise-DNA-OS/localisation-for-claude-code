@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Which languages are blocked for the next release?",
+    "command": "release-readiness"
+  },
+  {
+    "question": "Which translations are missing?",
+    "command": "backlog"
+  },
+  {
+    "question": "Which reviewed words became stale after a source edit?",
+    "command": "review-queue"
+  },
+  {
+    "question": "Which placeholders no longer match the source?",
+    "command": "backlog"
+  },
+  {
+    "question": "Which labels exceed our character limits?",
+    "command": "backlog"
+  },
+  {
+    "question": "Which terms break our chosen wording?",
+    "command": "backlog"
+  },
+  {
+    "question": "Which claims have overdue supporting evidence?",
+    "command": "compliance"
+  },
+  {
+    "question": "Who owns the overdue translator follow-ups?",
+    "command": "overdue"
+  },
+  {
+    "question": "What changed and who recorded it?",
+    "command": "activity"
+  },
+  {
+    "question": "What decisions belong in the Monday review?",
+    "command": "weekly-review"
+  }
+]

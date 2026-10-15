@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Language readiness",
+    "ask": "Which languages still have release blockers?",
+    "command": "npm run localise -- release-readiness",
+    "output": "project               locale  total  ready  blocked\n  --------------------  ------  -----  -----  -------\n  Harbour booking       de      3      0      3      \n  Harbour booking       fr      3      1      2      \n  Harbour trade portal  de      1      0      1      \n  Harbour trade portal  fr      1      0      1"
+  },
+  {
+    "title": "Overdue follow-ups",
+    "ask": "Which language decisions are late, and who owns them?",
+    "command": "npm run localise -- overdue",
+    "output": "name                       owner  due         project          key             status\n  -------------------------  -----  ----------  ---------------  --------------  ------\n  Confirm refund conditions  Mara   2026-10-10  Harbour booking  booking.refund  open"
+  },
+  {
+    "title": "Evidence to check",
+    "ask": "Which wording and project records need evidence reviewed?",
+    "command": "npm run localise -- compliance",
+    "output": "record_id                             record                rule               finding                                                \n  ------------------------------------  --------------------  -----------------  -------------------------------------------------------\n  10000000-0000-0000-0000-000000000002  Harbour trade portal  project-review     Review date missing or overdue                         \n  10000000-0000-0000-0000-000000000002  Harbour trade portal  retention-purpose  Record why personal information must be kept           \n  20000000-0000-0000-0000-000000000003  booking.refund        claim-evidence     Claim needs current evidence and a review date         \n  20000000-0000-0000-0000-000000000004  trade.contact         personal-accuracy  Personal information needs an accuracy check before use"
+  }
+]

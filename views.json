@@ -1,13 +1,43 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Localisation for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Localisation week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Release readiness",
+        "sql": "select project,locale,total,ready,blocked from release_readiness order by project,locale"
+      },
+      {
+        "title": "Overdue follow-ups",
+        "sql": "select name,owner,due,project,key from overdue_tasks order by due"
+      }
+    ]
+  },
+  {
+    "name": "review",
+    "title": "Translation review desk",
+    "sections": [
+      {
+        "title": "Strings needing a decision",
+        "sql": "select * from translation_status where state<>'ready' order by project,key,locale",
+        "columns": [
+          "project",
+          "key",
+          "locale",
+          "source_text",
+          "translation",
+          "state"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "evidence",
+    "title": "Evidence and record checks",
+    "sections": [
+      {
+        "title": "Evidence to check",
+        "sql": "select record,rule,finding from compliance_findings order by rule,record"
       }
     ]
   }
